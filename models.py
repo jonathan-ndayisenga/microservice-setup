@@ -32,14 +32,6 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-url_object = URL.create(
-    "postgresql+pg8000",
-    username="dbuser",
-    password="kx@jj5/g",  # plain (unescaped) text
-    host="pghost10",
-    database="appdb",
-)
-
 # Create an SQLAlchemy session
 engine = create_engine("postgresql+psycopg2://postgres:adminpassword12@localhost:5432/ecommerce_db")
 Session = sessionmaker(bind=engine)
