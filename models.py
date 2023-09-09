@@ -1,6 +1,7 @@
-from sqlalchemy  import Column, Integer, String, ForeignKey
+from sqlalchemy  import URL, Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+import psycopg2
 
 Base = declarative_base()
 
@@ -31,8 +32,16 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
+url_object = URL.create(
+    "postgresql+pg8000",
+    username="dbuser",
+    password="kx@jj5/g",  # plain (unescaped) text
+    host="pghost10",
+    database="appdb",
+)
+
 # Create an SQLAlchemy session
-engine = create_engine('database_connection_string')
+engine = create_engine("postgresql+psycopg2://postgres:adminpassword12@localhost:5432/ecommerce_db")
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -113,6 +122,10 @@ def create_order():
 
     # Return a response indicating success
     return jsonify({"message": "Order created successfully"})
+
+@app.route('/')
+def index():
+    return "WE ARE WORKING"
 
 if __name__ == '__main__':
     app.run(debug=True)
